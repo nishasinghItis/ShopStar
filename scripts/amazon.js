@@ -1,4 +1,4 @@
-console.log(products[1].rating.stars);
+ import {cart as myCart} from '../data/cart.js';
 
 let productsHTML = "";
 
