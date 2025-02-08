@@ -1,4 +1,4 @@
-import { cart } from "../data/cart.js"; // we are only accepting Id and quantity for now fr checkout card section remaining image price will be dublicated later
+import { cart ,removeFromCart} from "../data/cart.js"; // we are only accepting Id and quantity for now fr checkout card section remaining image price will be dublicated later
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";// ./means within the same file
 //for 3 radio buttons to select only one at a time 3 of the buttons should have different name attributes
@@ -38,7 +38,7 @@ cart.forEach((cartItem) => {
                             <span class="update-quantity-link link-primary">
                                 Update
                             </span>
-                            <span class="delete-quantity-link link-primary">
+                            <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
                                 Delete
                             </span>
                             </div>
@@ -91,8 +91,16 @@ cart.forEach((cartItem) => {
                         </div>
                     </div>`;
 
-                    console.log(cartSummaryHTML);
 });
 
 document.querySelector('.js-order-summary')
 .innerHTML=cartSummaryHTML;
+
+document.querySelectorAll('.js-delete-link')
+.forEach((link)=>{
+    link.addEventListener('click',()=>{
+        const productId=link.dataset.productId;
+        removeFromCart(productId);
+        console.log(cart);
+    });
+});
