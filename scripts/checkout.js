@@ -5,7 +5,7 @@ import { formatCurrency } from "./utils/money.js"; // ./means within the same fi
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { deliveryOptions } from "../data/deliveryOptions.js";
 
-
+function renderOrderSummary(){
 let cartSummaryHTML;
 
 cart.forEach((cartItem) => {
@@ -131,6 +131,9 @@ document.querySelectorAll('.js-delivery-option')
 .forEach((element)=>{
 element.addEventListener('click',()=>{
     const {productId,deliveryOptionId}=element.dataset;
-    updateDeliveryOption(productId,deliveryOptionId)
+    updateDeliveryOption(productId,deliveryOptionId);
+    renderOrderSummary();
 });
 });
+}
+renderOrderSummary();
