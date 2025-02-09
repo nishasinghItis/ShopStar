@@ -4,6 +4,8 @@ import { formatCurrency } from "../utils/money.js"; // ./means within the same f
 //for 3 radio buttons to select only one at a time 3 of the buttons should have different name attributes
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
+import { renderPaymentSummary } from "./paymentSummary.js";
+
 
 export function renderOrderSummary(){
 let cartSummaryHTML;
@@ -116,6 +118,8 @@ document.querySelectorAll(".js-delete-link").forEach((link) => {
       `.js-cart-item-container-${productId}`
     );
     container.remove();
+
+    renderPaymentSummary();
   });
 });
 
@@ -125,6 +129,7 @@ element.addEventListener('click',()=>{
     const {productId,deliveryOptionId}=element.dataset;
     updateDeliveryOption(productId,deliveryOptionId);
     renderOrderSummary();
+    renderPaymentSummary();
 });
 });
 }
